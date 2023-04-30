@@ -17,8 +17,6 @@ SSTRIP_NAME = ELFkickers-3.1
 CFLAGS    = -Wall -O2
 LDFLAGS   =
 
-
-
 -include $(LINUX_CONFIG)
 
 all:go_build
@@ -32,11 +30,11 @@ endif
 
 go_build:
 	mkdir -p $(THISDIR)/go
-	( if [ ! -f $(THISDIR)/go/go1.17.6.linux-amd64.tar.gz ]; then \
-	curl --create-dirs -L https://gomirrors.org/dl/go/go1.17.6.linux-amd64.tar.gz -o $(THISDIR)/go/go1.17.6.linux-amd64.tar.gz ; \
+	( if [ ! -f $(THISDIR)/go/go$(go_version).linux-amd64.tar.gz ]; then \
+	curl --create-dirs -L https://dl.google.com/go/go$(go_version).linux-amd64.tar.gz -o $(THISDIR)/go/go$(go_version).linux-amd64.tar.gz ; \
 	fi )
 	( if [ ! -d $(THISDIR)/go/go ]; then \
-	tar zxfv $(THISDIR)/go/go1.17.6.linux-amd64.tar.gz -C go ; \
+	tar zxfv $(THISDIR)/go/go$(go_version).linux-amd64.tar.gz -C go ; \
 	fi )
 
 clean:
