@@ -548,12 +548,12 @@ static void prom_init_sysclk(void)
 		cpu_ffrac = (reg & 0x1F);
 		mips_cpu_feq = (500 * cpu_ffrac / cpu_fdiv) * 1000 * 1000;
 		break;
-	case 1: /* CPU PLL */
+	case 1: /* CPU PLL 1000Mhz--0x312，1100Mhz--0x362，1200Mhz--0x3B2 */
 		reg = (*(volatile u32 *)(RALINK_MEMCTRL_BASE + 0x648));
 #if defined(CONFIG_RALINK_MT7621_PLL900)
-		if ((reg & 0xff) != 0xc2) {
-			reg &= ~(0xff);
-			reg |=  (0xc2);
+		if ((reg & 0x7ff) != 0x362) {
+			reg &= ~(0x7ff);
+			reg |=  (0x362);
 			(*((volatile u32 *)(RALINK_MEMCTRL_BASE + 0x648))) = reg;
 			udelay(10);
 		}
