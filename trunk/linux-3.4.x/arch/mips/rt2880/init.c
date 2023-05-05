@@ -551,9 +551,9 @@ static void prom_init_sysclk(void)
 	case 1: /* CPU PLL 1000Mhz--0x312，1100Mhz--0x362，1200Mhz--0x3B2 */
 		reg = (*(volatile u32 *)(RALINK_MEMCTRL_BASE + 0x648));
 #if defined(CONFIG_RALINK_MT7621_PLL900)
-		if ((reg & 0x7ff) != 0x312) {
+		if ((reg & 0x7ff) != 0x362) {
 			reg &= ~(0x7ff);
-			reg |=  (0x312);
+			reg |=  (0x362);
 			(*((volatile u32 *)(RALINK_MEMCTRL_BASE + 0x648))) = reg;
 			udelay(10);
 		}
